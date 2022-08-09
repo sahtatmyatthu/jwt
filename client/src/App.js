@@ -26,7 +26,7 @@ function App() {
 
   const axiosJWT = axios.create()
 
-  // request မတိုင်ခင် intercept လုပ်မယ့်ကောင်
+ 
   axiosJWT.interceptors.request.use(
     async (config) => {
       let currentDate = new Date();
@@ -41,6 +41,8 @@ function App() {
       return Promise.reject(error);
     }
   );
+   // request မတိုင်ခင် intercept လုပ်မယ့်ကောင်
+  // လက်ရှိ current time နဲ့  token ရဲ့ exp ဖြစ်မယ် အချိန်ကို ကြည့်ပြီး refresh token route ကို သွားခေါ်ခိုင်းတာမျိုး
 
 
   
