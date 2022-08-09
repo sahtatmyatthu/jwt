@@ -1,4 +1,4 @@
-import "./app.css";
+import "./App.css";
 import axios from "axios";
 import { useState } from "react";
 import jwt_decode from "jwt-decode";
@@ -26,6 +26,7 @@ function App() {
 
   const axiosJWT = axios.create()
 
+  // request မတိုင်ခင် intercept လုပ်မယ့်ကောင်
   axiosJWT.interceptors.request.use(
     async (config) => {
       let currentDate = new Date();
@@ -41,6 +42,8 @@ function App() {
     }
   );
 
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -50,6 +53,11 @@ function App() {
       console.log(err);
     }
   };
+  // login လုပ်ပြီဆိုတာနဲ့ ဒီကောင် ထလုပ်မှာ 
+  // /api/login route ဆီကို username နဲ့ password ပို့ပေးမယ်
+  // user ထဲကို username နဲ့ password ဝင်သွားမယ်
+  // username နဲ့ password ထဲကိုလည်း form ဖြည့်တဲ့အခါ data တွေဝင်သွားတာမျိုးပေါ့
+
 
   const handleDelete = async (id) => {
     setSuccess(false);
@@ -63,6 +71,8 @@ function App() {
       setError(true);
     }
   };
+// /api/users/:userId ဆီကို data ပို့ပေးမယ့် function
+// အာ့ကြောင့်မလို့  header ရဲ့  key  authorization  နဲ့ "Bearer " + user.accessToken  ကိုပါတွဲပို့ပေးမှာပေါ့
 
   return (
     <div className="container">
@@ -73,7 +83,7 @@ function App() {
             <b>{user.username}</b>.
           </span>
           <span>Delete Users:</span>
-          <button className="deleteButton" onClick={() => handleDelete(1)}>
+          <button className="deleteButton" onClick={() => handleDelete(1)}> 
             Delete John
           </button>
           <button className="deleteButton" onClick={() => handleDelete(2)}>
@@ -91,6 +101,7 @@ function App() {
           )}
         </div>
       ) : (
+        // user login လုပ်မယ့် ui 
         <div className="login">
           <form onSubmit={handleSubmit}>
             <span className="formTitle">Lama Login</span>
